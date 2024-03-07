@@ -3,14 +3,14 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"sync"
 )
 
 func main() {
-	numberList := generateNumList(100000000)
-	numberOfGroups := 5
+	amountOfRandomNumbers, numberOfGroups := getInput()
+	numberList := generateNumList(amountOfRandomNumbers)
 	splitList := splitList(numberList, numberOfGroups)
-
 	ch := make(chan int64, numberOfGroups)
 	var wg sync.WaitGroup
 
@@ -25,8 +25,24 @@ func main() {
 	for num := range ch {
 		totalSum += num
 	}
-
 	fmt.Println("Total sum:", totalSum)
+}
+
+func getInput() (int, int) {
+	var input string
+	fmt.Println("Please enter the amount of random numbers you want to generate: ")
+	fmt.Scan(&input)
+	amountOfRandomNumbers, err := strconv.Atoi(input)
+	for {
+		if err == nil {
+			break
+		}
+		fmt.Println("Invalid input. Please enter an integer: ")
+		fmt.Scan(&input)
+		amountOfRandomNumbers, err = strconv.Atoi(input)
+	}
+	numberOfGroups := len(input)
+	return amountOfRandomNumbers, numberOfGroups
 }
 
 func beginSumming(nums []int64, ch chan int64, wg *sync.WaitGroup) {
@@ -36,6 +52,7 @@ func beginSumming(nums []int64, ch chan int64, wg *sync.WaitGroup) {
 }
 
 func splitList(list []int64, pieces int) [][]int64 {
+	fmt.Printf("Splitting list into %d pieces\n", pieces)
 	subListLength := (len(list)) / pieces
 	resultList := make([][]int64, pieces)
 	for i := 0; i < pieces; i++ {
