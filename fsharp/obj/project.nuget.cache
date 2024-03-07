@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "fRvq9TuC8MomcIs4jbrsZCik16Yjhp4cufNYnmn5RxW4PrmF1IPpFQyZ/TSpgBfHMfW0RgA63/YRRwv0ev1TZg==",
+  "success": true,
+  "projectFilePath": "/Users/benlandrette/ccode/multi-language-practice/concurrency/fsharp/fsharp.fsproj",
+  "expectedPackageFiles": [
+    "/Users/benlandrette/.nuget/packages/fsharp.core/8.0.100/fsharp.core.8.0.100.nupkg.sha512"
+  ],
+  "logs": []
+}
