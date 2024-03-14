@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"strconv"
 	"sync"
+	"time"
 )
 
 func main() {
@@ -81,4 +82,34 @@ func generateNumList(length int) []int64 {
 
 func randomNumUnder(num int) int64 {
 	return int64(rand.Int() % num)
+}
+
+func concurrentExample() {
+    // Start a goroutine to perform a concurrent task
+    go func() {
+        for i := 0; i < 5; i++ {
+            fmt.Println("Goroutine: ", i)
+            time.Sleep(time.Second)
+        }
+    }()
+    // Main goroutine continues execution
+    for i := 0; i < 5; i++ {
+        fmt.Println("Main: ", i)
+        time.Sleep(time.Second)
+    }
+}
+
+func secondConcurrentExample() {
+	// Main goroutine
+	fmt.Println("Main goroutine starts")
+
+	// Start a new goroutine
+	go func() {
+		fmt.Println("Goroutine starts")
+		time.Sleep(time.Second)
+		fmt.Println("Goroutine ends")
+	}()
+
+	time.Sleep(2 * time.Second)
+	fmt.Println("Main goroutine ends")
 }
